@@ -33,9 +33,3 @@
     -fx-font-size: 16px;
 }
 
-#footer-section {
-    -fx-alignment: center;
-    -fx-padding: 10 10 10 10;
-    -fx-border-width: 1;
-    -fx-border-color: #E8E8E8 transparent transparent transparent;
-}
