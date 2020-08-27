@@ -14,27 +14,28 @@
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
 
     <stylesheets>
-        <URL value="@style.css" />
+        <URL value="@style.css"/>
     </stylesheets>
 
     <children>
-        <Label fx:id="lblOutput" layoutX="91.0" layoutY="129.0" prefHeight="17.0" prefWidth="118.0"/>
+        <Label fx:id="lblOutput" layoutX="91.0" layoutY="129.0" prefHeight="17.0"
+               prefWidth="118.0"/>
         <Button layoutX="117.0" layoutY="89.0" mnemonicParsing="false" onAction="#sayHello"
                 text="Say Hello"/>
     </children>
 
-        <children>
-            <TabPane>
-                <Tab fx:id="tab1" text="Product Line">
-                </Tab>
+    <children>
+        <TabPane>
+            <Tab fx:id="tab1" text="Product Line">
+            </Tab>
 
-                <Tab fx:id="tab2" text="Produce">
-                </Tab>
+            <Tab fx:id="tab2" text="Produce">
+            </Tab>
 
-                <Tab fx:id="tab3" text="Production Log">
-                </Tab>
+            <Tab fx:id="tab3" text="Production Log">
+            </Tab>
 
-            </TabPane>
-        </children>
+        </TabPane>
+    </children>
 
 </Pane>
