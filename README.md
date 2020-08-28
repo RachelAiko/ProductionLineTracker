@@ -5,7 +5,7 @@ Object Oriented Production Line Tracker with a GUI and database.
    
 
 ## Software
-JavaFX
+JavaFX , 
 Gradle
 
 ## License
