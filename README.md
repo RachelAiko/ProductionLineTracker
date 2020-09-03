@@ -6,7 +6,8 @@ Object Oriented Production Line Tracker with a GUI and database.
 
 ## Software
 JavaFX , 
-Gradle
+Gradle,
+Scene Builder
 
 
 
