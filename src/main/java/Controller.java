@@ -10,4 +10,13 @@ public class Controller {
         lblOutput.setText("Hello!");
     }
 
+    @FXML
+    private void addProduct() {
+        System.out.println("Product Added");
+    }
+
+    @FXML
+    private void recordProduction() {
+        System.out.println("Production Recorded");
+    }
 }
