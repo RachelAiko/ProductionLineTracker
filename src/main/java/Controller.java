@@ -49,45 +49,45 @@ public class Controller {
 
     @FXML
     private void initialize() {
-
+        initializeDB();
     }
+    public void initializeDB() {
+        final String JDBC_DRIVER = "org.h2.Driver";
+        final String DB_URL = "jdbc:h2:./resources/PLdb";
 
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./resources/PLdb";
+        //  Database credentials
+        final String USER = "";
+        final String PASS = "";
+        Connection conn = null;
+        Statement stmt = null;
 
-    //  Database credentials
-    final String USER = "";
-    final String PASS = "";
-    Connection conn = null;
-    Statement stmt = null;
+        try {
+            // STEP 1: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
 
-       /*try {
-        // STEP 1: Register JDBC driver
-        Class.forName(JDBC_DRIVER);
+            //STEP 2: Open a connection
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-        //STEP 2: Open a connection
-        //conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        conn = DriverManager.getConnection(DB_URL);
+            //STEP 3: Execute a query
+            stmt = conn.createStatement();
 
-
-        //STEP 3: Execute a query
-        stmt = conn.createStatement();
+            String sql = "SELECT * FROM PRODUCT";
 
 
-        ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()) {
-            System.out.println(rs.getString(1));
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+            }
+
+            // STEP 4: Clean-up environment
+            stmt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        // STEP 4: Clean-up environment
-        stmt.close();
-        conn.close();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-
-    } catch (
-    SQLException e) {
-        e.printStackTrace();
-    }*/
+    }
 
 }
