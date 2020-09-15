@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="PLdb" uuid="b8ac8bba-3b79-4431-a77b-c620a4ace97c">
+    <data-source source="LOCAL" name="PLdb" uuid="3baee8d5-8dd8-480a-890d-99cce2241138">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>
