@@ -7,11 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+*/
 
 
 public class Controller {
@@ -27,6 +29,8 @@ public class Controller {
 
     @FXML
     private void addProduct() {
+        //String sql = "INSERT INTO Product(type, manufacturer, name)" + "VALUES ('AUDIO', " +
+              //  "'Apple', 'iPod')";
         System.out.println("Product Added");
     }
 
@@ -70,9 +74,9 @@ public class Controller {
 
             //STEP 3: Execute a query
             stmt = conn.createStatement();
-
-            String sql = "SELECT * FROM PRODUCT";
-
+            String sql = "SELECT *";
+            //String sql = "INSERT INTO Product(type, manufacturer, name)" + "VALUES ('AUDIO', " +
+                    //"'Apple', 'iPod')";
 
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
@@ -89,43 +93,5 @@ public class Controller {
             e.printStackTrace();
         }
     }
-
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./resources/PLdb";
-
-    //  Database credentials
-    final String USER = "";
-    final String PASS = "";
-    Connection conn = null;
-    Statement stmt = null;
-
-       /*try {
-        // STEP 1: Register JDBC driver
-        Class.forName(JDBC_DRIVER);
-
-        //STEP 2: Open a connection
-        //conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        conn = DriverManager.getConnection(DB_URL);
-
-
-        //STEP 3: Execute a query
-        stmt = conn.createStatement();
-
-
-        ResultSet rs = stmt.executeQuery(sql);
-        while (rs.next()) {
-            System.out.println(rs.getString(1));
-        }
-
-        // STEP 4: Clean-up environment
-        stmt.close();
-        conn.close();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-
-    } catch (
-    SQLException e) {
-        e.printStackTrace();
-    }*/
 
 }
