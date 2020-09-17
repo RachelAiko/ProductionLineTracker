@@ -1,19 +1,9 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.TextField;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-/*
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-*/
 
 public class Controller {
 
@@ -21,19 +11,22 @@ public class Controller {
   private Label lblOutput;
 
   @FXML
-  private void sayHello() {
-    lblOutput.setText("Hello!");
-  }
+  private TextField txtManufacturerName;
+
+  @FXML
+  private TextField txtProductName;
+
+  @FXML
+  private ChoiceBox<String> itemType;
 
   @FXML
   private void addProduct() {
-    //String sql = "INSERT INTO Product(type, manufacturer, name)" + "VALUES ('AUDIO', " +
-    //  "'Apple', 'iPod')";
     System.out.println("Product Added");
   }
 
   @FXML
   private void recordProduction() {
+
     System.out.println("Production Recorded");
   }
 
@@ -42,18 +35,16 @@ public class Controller {
   }
 
   @FXML
-  private void chooseQuantity() {
-    List<String> chooseQuantity = new ArrayList<String>();
-    chooseQuantity.add("1");
-    chooseQuantity.add("2");
-    chooseQuantity.add("3");
-  }
+  private ComboBox<String> chooseQuantity;
 
   @FXML
   private void initialize() {
     initializeDB();
-  }
+    for (int count = 1; count <= 10; count++) {
+      chooseQuantity.getItems().add(String.valueOf(count));
+    }
 
+  }
 
   public void initializeDB() {
     final String JDBC_DRIVER = "org.h2.Driver";
@@ -70,18 +61,32 @@ public class Controller {
       Class.forName(JDBC_DRIVER);
 
       //STEP 2: Open a connection
+      System.out.println("Connecting to a selected database...");
       conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      System.out.println("Connected database successfully...");
 
       //STEP 3: Execute a query
+      System.out.println("Inserting records into the table...");
       stmt = conn.createStatement();
-      String sql = "SELECT * FROM Product ";
-      //String sql = "INSERT INTO Product(type, manufacturer, name)" + "VALUES ('AUDIO', " +
-      //"'Apple', 'iPod')";
 
-      ResultSet rs = stmt.executeQuery(sql);
-      while (rs.next()) {
-        System.out.println(rs.getString(1));
-      }
+      // Gets product name and manufacturer from GUI
+      String name = txtProductName.getText();
+      String manufacturer = txtManufacturerName.getText();
+
+      String insertSQL = "INSERT INTO product(NAME, TYPE, MANUFACTURER ) VALUES ( 'iPod', 'Audio', "
+                          +"'Apple')";
+
+      String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
+
+      stmt.executeUpdate(insertSQL);
+
+     /* ResultSet rs = stmt.executeQuery(sql);
+      rs.next();
+      String id = rs.getString(1);
+      String name = rs.getString(2);
+      String type = rs.getString(3);
+      String manufacturer = rs.getString(4);
+      System.out.println(id + " " + name + " " + type + " " + manufacturer + " ");*/
 
       // STEP 4: Clean-up environment
       stmt.close();

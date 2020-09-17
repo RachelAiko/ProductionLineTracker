@@ -50,10 +50,10 @@
                   <Label alignment="CENTER" prefHeight="16.0" prefWidth="130.0"
                     GridPane.columnSpan="2"/>
                   <Label text="Label" GridPane.rowIndex="1"/>
-                  <TextField prefHeight="33.0" prefWidth="265.0" promptText="Manufacturer"
-                    GridPane.columnSpan="2" GridPane.rowIndex="1"/>
-                  <TextField prefHeight="33.0" prefWidth="278.0" promptText="Product Name"
-                    GridPane.columnSpan="2"/>
+                  <TextField fx:id="txtManufacturerName" prefHeight="33.0" prefWidth="265.0"
+                    promptText="Manufacturer" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+                  <TextField fx:id="txtProductName" prefHeight="33.0" prefWidth="278.0"
+                    promptText="Product Name" GridPane.columnSpan="2"/>
                   <Label alignment="CENTER" prefHeight="21.0" prefWidth="108.0" text="Item Type"
                     GridPane.rowIndex="2"/>
                   <ChoiceBox fx:id="itemType" prefHeight="33.0" prefWidth="150.0"
