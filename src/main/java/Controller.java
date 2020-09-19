@@ -7,16 +7,24 @@
  * Defines the Controller class.
  */
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-import java.sql.*;
-import org.h2.command.Prepared;
+//import org.h2.command.Prepared;
 
 public class Controller {
 
+  public Tab tab1;
+  public Tab tab2;
+  public Tab tab3;
   @FXML
   private Label lblOutput;
 
@@ -45,6 +53,7 @@ public class Controller {
 
   @FXML
   private void itemType() {
+    System.out.println("Chose item type");
   }
 
   @FXML
@@ -63,23 +72,26 @@ public class Controller {
 
   }
 
+  /**
+   * Opens database connection. Executes query Cleans up and closes connection
+   */
   public void initializeDB() {
-    final String JDBC_DRIVER = "org.h2.Driver";
-    final String DB_URL = "jdbc:h2:./resources/PLdb";
+    final String Jdbc_Driver = "org.h2.Driver";
+    final String Db_url = "jdbc:h2:./resources/PLdb";
 
     //  Database credentials
-    final String USER = "";
-    final String PASS = "";
+    final String User = "";                 //Intentionally left blank
+    final String Pass = "";                 //Intentionally left blank
     Connection conn = null;
     Statement stmt = null;
 
     try {
       // STEP 1: Register JDBC driver
-      Class.forName(JDBC_DRIVER);
+      Class.forName(Jdbc_Driver);
 
       //STEP 2: Open a connection
       System.out.println("Connecting to a selected database...");
-      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+      conn = DriverManager.getConnection(Db_url, User, Pass);
       System.out.println("Connected database successfully...");
 
       //STEP 3: Execute a query
@@ -91,7 +103,7 @@ public class Controller {
       String manufacturer = txtManufacturerName.getText();*/
 
       //Hard codes a product into database table product
-      String insertSQL = "INSERT INTO product(NAME, TYPE, MANUFACTURER ) VALUES ( 'iPod', 'Audio', "
+      String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
           + "'Apple')";
 
       /*JDBC PreparedStatement
@@ -100,7 +112,7 @@ public class Controller {
 
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
-      stmt.executeUpdate(insertSQL);
+      stmt.executeUpdate(insertSql);
 
       //Prints the contents of the product table to terminal
       ResultSet rs = stmt.executeQuery(sql);
@@ -115,6 +127,7 @@ public class Controller {
       // STEP 4: Clean-up environment
       stmt.close();
       conn.close();
+      rs.close();
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
 
