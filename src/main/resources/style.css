@@ -1,9 +1,17 @@
+/*
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: style.css
+ *
+ * Defines the stylesheet for the Production Line Tracker GUI.
+ */
 
 .root {
   -fx-font-size: 18px;
   -fx-font-family: sans-serif;
   -fx-font-weight: bold;
-  -fx-background-color: lightblue;
+  -fx-background-color: paleturquoise;
 }
 
 .header-section {
@@ -19,7 +27,7 @@
 }
 
 #account {
-  -fx-background-color: grey;
+  -fx-background-color: lavenderblush;
   -fx-text-fill: #ffffff;
   -fx-font-size: 16px;
   -fx-cursor: hand;
@@ -54,7 +62,7 @@
 }
 
 .tab-pane {
-  -fx-background-color: lightblue;
+  -fx-background-color: paleturquoise;
 }
 
 .label {
@@ -65,5 +73,5 @@
 }
 
 .border-pane {
-  -fx-background-color: white;
+  -fx-background-color: lavenderblush;
 }

@@ -1,9 +1,19 @@
+/*
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: Controller.java
+ *
+ * Defines the Controller class.
+ */
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.sql.*;
+import org.h2.command.Prepared;
 
 public class Controller {
 
@@ -21,12 +31,15 @@ public class Controller {
 
   @FXML
   private void addProduct() {
+
+    //Prints to terminal when add button is pushed
     System.out.println("Product Added");
   }
 
   @FXML
   private void recordProduction() {
 
+    //Prints to terminal when record production button is pushed
     System.out.println("Production Recorded");
   }
 
@@ -40,8 +53,12 @@ public class Controller {
   @FXML
   private void initialize() {
     initializeDB();
+
+    //Populates comboBox for quantity
     for (int count = 1; count <= 10; count++) {
       chooseQuantity.getItems().add(String.valueOf(count));
+      chooseQuantity.getSelectionModel().selectFirst();
+      chooseQuantity.setEditable(true);
     }
 
   }
@@ -69,24 +86,31 @@ public class Controller {
       System.out.println("Inserting records into the table...");
       stmt = conn.createStatement();
 
-      // Gets product name and manufacturer from GUI
+      /*Gets product name and manufacturer from GUI
       String name = txtProductName.getText();
-      String manufacturer = txtManufacturerName.getText();
+      String manufacturer = txtManufacturerName.getText();*/
 
+      //Hard codes a product into database table product
       String insertSQL = "INSERT INTO product(NAME, TYPE, MANUFACTURER ) VALUES ( 'iPod', 'Audio', "
-                          +"'Apple')";
+          + "'Apple')";
+
+      /*JDBC PreparedStatement
+      PreparedStatement stmt = conn
+          .prepareStatement("INSERT INTO product(name,type,manufacturer)VALUES (?, ?, ?)");*/
 
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
       stmt.executeUpdate(insertSQL);
 
-     /* ResultSet rs = stmt.executeQuery(sql);
-      rs.next();
-      String id = rs.getString(1);
-      String name = rs.getString(2);
-      String type = rs.getString(3);
-      String manufacturer = rs.getString(4);
-      System.out.println(id + " " + name + " " + type + " " + manufacturer + " ");*/
+      //Prints the contents of the product table to terminal
+      ResultSet rs = stmt.executeQuery(sql);
+      while (rs.next()) {
+        String id = rs.getString(1);
+        String name = rs.getString(2);
+        String type = rs.getString(3);
+        String manufacturer = rs.getString(4);
+        System.out.println(id + " " + name + " " + type + " " + manufacturer + " ");
+      }
 
       // STEP 4: Clean-up environment
       stmt.close();
