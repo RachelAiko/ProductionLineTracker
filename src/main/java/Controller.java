@@ -9,6 +9,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;  //Have not implemented preparedStatement yet.
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-//import org.h2.command.Prepared;
+import org.h2.command.Prepared;   //Have not implemented preparedStatement yet.
 
 public class Controller {
 
@@ -98,17 +99,23 @@ public class Controller {
       System.out.println("Inserting records into the table...");
       stmt = conn.createStatement();
 
-      /*Gets product name and manufacturer from GUI
+      //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
       String name = txtProductName.getText();
-      String manufacturer = txtManufacturerName.getText();*/
+      String manufacturer = txtManufacturerName.getText();
 
       //Hard codes a product into database table product
       String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
           + "'Apple')";
 
-      /*JDBC PreparedStatement
-      PreparedStatement stmt = conn
-          .prepareStatement("INSERT INTO product(name,type,manufacturer)VALUES (?, ?, ?)");*/
+      /*JDBC PreparedStatement  (YET TO BE IMPLEMENTED)
+      PreparedStatement ps = conn
+          .prepareStatement("INSERT INTO product(name,type,manufacturer)" + "VALUES (?, ?, ?)");
+
+      ps.setString(1, name);
+      ps.setString(2, "audio");
+      ps.setString(3, manufacturer);
+
+      ps.executeUpdate(); */
 
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
@@ -118,10 +125,11 @@ public class Controller {
       ResultSet rs = stmt.executeQuery(sql);
       while (rs.next()) {
         String id = rs.getString(1);
-        String name = rs.getString(2);
-        String type = rs.getString(3);
-        String manufacturer = rs.getString(4);
-        System.out.println(id + " " + name + " " + type + " " + manufacturer + " ");
+        String productName = rs.getString(2);
+        String productType = rs.getString(3);
+        String productManufacturer = rs.getString(4);
+        System.out
+            .println(id + " " + productName + " " + productType + " " + productManufacturer + " ");
       }
 
       // STEP 4: Clean-up environment
