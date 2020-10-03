@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;  //Have not implemented preparedStatement yet
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -53,9 +54,8 @@ public class Controller {
   }
 
   @FXML
-  private void itemType() {
-    System.out.println("Chose item type");
-  }
+  private ChoiceBox<ItemType> itemChoice;
+
 
   @FXML
   private ComboBox<String> chooseQuantity;
@@ -70,6 +70,14 @@ public class Controller {
       chooseQuantity.getSelectionModel().selectFirst();
       chooseQuantity.setEditable(true);
     }
+
+    //Populates choice box for Item Type
+    Arrays.asList(ItemType.values()).
+        forEach(ItemType -> System.out.println(ItemType));
+    /*for (ItemType itemType : ItemType.values()) {
+      itemChoice.getItems();
+    }*/
+
 
   }
 
