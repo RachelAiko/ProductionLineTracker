@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;  //Have not implemented preparedStatement yet
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -63,6 +64,7 @@ public class Controller {
   @FXML
   private void initialize() {
     initializeDB();
+   // testMultimedia();
 
     //Populates comboBox for quantity
     for (int count = 1; count <= 10; count++) {
@@ -151,5 +153,22 @@ public class Controller {
       e.printStackTrace();
     }
   }
+  /*// tests the functionality of user interface
+  public static void testMultimedia() {
+    AudioPlayer newAudioProduct = new AudioPlayer("DP-X1A", "Onkyo",
+        "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
+    Screen newScreen = new Screen("720x480", 40, 22);
+    MoviePlayer newMovieProduct = new MoviePlayer("DBPOWER MK101", "OracleProduction", newScreen,
+        MonitorType.LCD);
+    ArrayList<MultimediaControl> productList = new ArrayList<MultimediaControl>();
+    productList.add(newAudioProduct);
+    productList.add(newMovieProduct);
+    for (MultimediaControl p : productList) {
+      System.out.println(p);
+      p.play();
+      p.stop();
+      p.next();
+      p.previous();
+    }*/
+  }
 
-}
