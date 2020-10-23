@@ -40,6 +40,10 @@ public class Controller {
   @FXML
   private ChoiceBox<String> itemType;
 
+ // @FXML
+ // private TextArea TxtProductionLog;
+
+
   @FXML
   private void addProduct() {
 
@@ -76,9 +80,9 @@ public class Controller {
     //Populates choice box for Item Type
     Arrays.asList(ItemType.values()).
         forEach(ItemType -> System.out.println(ItemType));
-    /*for (ItemType itemType : ItemType.values()) {
+    for (ItemType itemType : ItemType.values()) {
       itemChoice.getItems();
-    }*/
+    }
 
 
   }
@@ -114,10 +118,10 @@ public class Controller {
       String manufacturer = txtManufacturerName.getText();
 
       //Hard codes a product into database table product
-      String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
-          + "'Apple')";
+      //String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
+         // + "'Apple')";
 
-      /*JDBC PreparedStatement  (YET TO BE IMPLEMENTED)
+      //JDBC PreparedStatement  (YET TO BE IMPLEMENTED)
       PreparedStatement ps = conn
           .prepareStatement("INSERT INTO product(name,type,manufacturer)" + "VALUES (?, ?, ?)");
 
@@ -125,11 +129,11 @@ public class Controller {
       ps.setString(2, "audio");
       ps.setString(3, manufacturer);
 
-      ps.executeUpdate(); */
+      ps.executeUpdate();
 
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
-      stmt.executeUpdate(insertSql);
+      //stmt.executeUpdate(insertSql);
 
       //Prints the contents of the product table to terminal
       ResultSet rs = stmt.executeQuery(sql);
