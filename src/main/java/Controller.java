@@ -37,10 +37,7 @@ public class Controller {
   @FXML
   private TextField txtProductName;
 
-  @FXML
-  private ChoiceBox<String> itemType;
-
- // @FXML
+  // @FXML
  // private TextArea TxtProductionLog;
 
 
@@ -67,24 +64,29 @@ public class Controller {
 
   @FXML
   private void initialize() {
-    initializeDB();
-   // testMultimedia();
 
-    //Populates comboBox for quantity
+    initializeDB();
+
+    initializeItemChoice();
+
+    initializeQuantityBox();
+
+  }
+
+  //Populates comboBox for quantity
+  private void initializeQuantityBox() {
     for (int count = 1; count <= 10; count++) {
       chooseQuantity.getItems().add(String.valueOf(count));
       chooseQuantity.getSelectionModel().selectFirst();
       chooseQuantity.setEditable(true);
     }
+  }
 
-    //Populates choice box for Item Type
-    Arrays.asList(ItemType.values()).
-        forEach(ItemType -> System.out.println(ItemType));
-    for (ItemType itemType : ItemType.values()) {
-      itemChoice.getItems();
-    }
-
-
+  //Populates choice box for Item Type
+  private void initializeItemChoice() {
+    itemChoice.getItems().clear();
+    itemChoice.getItems().addAll(ItemType.values());
+    itemChoice.getSelectionModel().selectFirst();
   }
 
   /**
@@ -115,6 +117,7 @@ public class Controller {
 
       //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
       String name = txtProductName.getText();
+      //String type = itemChoice.
       String manufacturer = txtManufacturerName.getText();
 
       //Hard codes a product into database table product
@@ -157,7 +160,7 @@ public class Controller {
       e.printStackTrace();
     }
   }
-  /*// tests the functionality of user interface
+ /* // tests the functionality of user interface
   public static void testMultimedia() {
     AudioPlayer newAudioProduct = new AudioPlayer("DP-X1A", "Onkyo",
         "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
@@ -173,6 +176,7 @@ public class Controller {
       p.stop();
       p.next();
       p.previous();
-    }*/
+    }
+  }*/
   }
 
