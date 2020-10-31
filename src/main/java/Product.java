@@ -7,10 +7,14 @@ public abstract class Product implements Item {
 
 
 
-  Product(String name, String manufacturer, ItemType type) {
+  Product( String name, String manufacturer, ItemType type) {
+    this.Id = Id;
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
+  }
+
+  public Product(String name, ItemType itemType, String manufacturer) {
   }
 
   public String toString() {

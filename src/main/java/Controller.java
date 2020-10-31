@@ -9,19 +9,26 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;  //Have not implemented preparedStatement yet.
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import org.h2.command.Prepared;   //Have not implemented preparedStatement yet.
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Controller {
 
@@ -37,23 +44,39 @@ public class Controller {
   @FXML
   private TextField txtProductName;
 
-  // @FXML
- // private TextArea TxtProductionLog;
+   @FXML
+  private TextArea TxtProductionLog;
 
-
+  /**
+   * The 'products' table.
+   */
   @FXML
-  private void addProduct() {
+  private TableView<ProductionRecord> tblProducts;
 
-    //Prints to terminal when add button is pushed
-    System.out.println("Product Added");
-  }
-
+  /**
+   * The 'products' table 'id' column.
+   */
   @FXML
-  private void recordProduction() {
+  private TableColumn<?, Product> colProductId;
 
-    //Prints to terminal when record production button is pushed
-    System.out.println("Production Recorded");
-  }
+  /**
+   * The 'products' table 'name' column.
+   */
+  @FXML
+  private TableColumn<?, Product> colProductName;
+
+  /**
+   * The 'products' table 'type' column.
+   */
+  @FXML
+  private TableColumn<?, Product> colProductType;
+
+  /**
+   * The 'products' table 'manufacturer' column.
+   */
+  @FXML
+  private TableColumn<?, Product> colProductManufacturer;
+
 
   @FXML
   private ChoiceBox<ItemType> itemChoice;
@@ -66,12 +89,28 @@ public class Controller {
   private void initialize() {
 
     initializeDB();
+   // Data.open();
 
     initializeItemChoice();
 
     initializeQuantityBox();
 
+    setupProductLineTable();
+
+    initializeProductionLog();
+
+    //productionLog.addAll(Data.loadProductionLog());
+
   }
+
+  // The list of production records loaded from the database.
+  private final ObservableList<ProductionRecord> productLine =
+      FXCollections.observableArrayList();
+
+
+  //The list of production records loaded from the database.
+  private final ObservableList<ProductionRecord> productionLog =
+      FXCollections.observableArrayList();
 
   //Populates comboBox for quantity
   private void initializeQuantityBox() {
@@ -89,9 +128,70 @@ public class Controller {
     itemChoice.getSelectionModel().selectFirst();
   }
 
-  /**
-   * Opens database connection. Executes query Cleans up and closes connection
-   */
+
+  @FXML
+  private void addProduct() {
+
+    //Prints to terminal when add button is pushed
+    System.out.println("Product Added");
+/*
+    //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
+    String name = txtProductName.getText();
+    ChoiceBox<ItemType> type = itemChoice;
+    String manufacturer = txtManufacturerName.getText();
+
+    //Product newProduct = addProduct(name, type, manufacturer);
+    //productLine.add(newProduct);*/
+  }
+
+  @FXML
+  private void recordProduction() {
+
+    //Prints to terminal when record production button is pushed
+    System.out.println("Production Recorded");
+    //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
+    String name = txtProductName.getText();
+    //String type = itemChoice.
+    String manufacturer = txtManufacturerName.getText();
+  }
+
+  //Initializes the 'products' table data.
+  private void setupProductLineTable() {
+
+    tblProducts.setItems(productLine);
+
+    colProductId.setCellValueFactory(new PropertyValueFactory<>("Id"));
+    colProductName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+    colProductType.setCellValueFactory(new PropertyValueFactory<>("Type"));
+    colProductManufacturer.setCellValueFactory(new PropertyValueFactory<>("Manufacturer"));
+  }
+  //Initializes the 'production log' text area.
+  private void initializeProductionLog() {
+
+    TxtProductionLog.setText("");
+    productionLog.addListener(
+        (ListChangeListener<ProductionRecord>) c -> {
+          while (c.next()) {
+            appendTxtProdsLog(c.getAddedSubList());
+          }
+        }
+    );
+  }
+
+  //Appends the given records to the 'prods log' text area.
+  private void appendTxtProdsLog(List<? extends ProductionRecord> list) {
+
+    TxtProductionLog.appendText(
+        list.stream()
+            .filter(Objects::nonNull)
+            .map(ProductionRecord::toString)
+            .collect(Collectors.joining("\n")) + "\n"
+    );
+  }
+
+
+
+  //Opens database connection. Executes query Cleans up and closes connection
   public void initializeDB() {
     final String Jdbc_Driver = "org.h2.Driver";
     final String Db_url = "jdbc:h2:./resources/PLdb";
@@ -117,8 +217,9 @@ public class Controller {
 
       //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
       String name = txtProductName.getText();
-      //String type = itemChoice.
+      ChoiceBox<ItemType> type = itemChoice;
       String manufacturer = txtManufacturerName.getText();
+
 
       //Hard codes a product into database table product
       //String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
@@ -126,10 +227,11 @@ public class Controller {
 
       //JDBC PreparedStatement  (YET TO BE IMPLEMENTED)
       PreparedStatement ps = conn
-          .prepareStatement("INSERT INTO product(name,type,manufacturer)" + "VALUES (?, ?, ?)");
+          .prepareStatement("INSERT INTO product (name, type, manufacturer) VALUES (?, ?, ?);");
 
+      // add the given properties to the database...
       ps.setString(1, name);
-      ps.setString(2, "audio");
+      ps.setString(2, String.valueOf(type));
       ps.setString(3, manufacturer);
 
       ps.executeUpdate();
@@ -159,6 +261,8 @@ public class Controller {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+
+
   }
  /* // tests the functionality of user interface
   public static void testMultimedia() {

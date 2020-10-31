@@ -11,11 +11,20 @@ public enum ItemType {
     this.type = type;
   }
 
-  public String getType() {
+  public static String getType(String type) {
     return type;
+  }
+
+  public static String getCode(String code) {
+    return code;
   }
 
   public String getCode() {
     return code;
   }
+
+  public String getType() {
+    return type;
+  }
+
 }

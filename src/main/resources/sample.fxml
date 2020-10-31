@@ -53,11 +53,12 @@
           <ChoiceBox fx:id="itemChoice" prefHeight="33.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         </GridPane>
         <Button fx:id="addProduct" layoutX="394.0" layoutY="138.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="43.0" prefWidth="229.0" text="Add Product" />
-        <TableView layoutX="57.0" layoutY="261.0" prefHeight="221.0" prefWidth="567.0">
+        <TableView  fx:id= "tblProducts" layoutX="57.0" layoutY="261.0" prefHeight="221.0" prefWidth="567.0">
           <columns>
-            <TableColumn prefWidth="195.0" text="Product Name" />
-            <TableColumn prefWidth="195.0" text="Manufacturer" />
-            <TableColumn prefWidth="195.0" text="Item Type" />
+            <TableColumn fx:id="colProductId" prefWidth="85.0" text="Id" />
+            <TableColumn fx:id="colProductName" prefWidth="165.0" text="Name" />
+            <TableColumn fx:id="colProductType" prefWidth="155.0" text="Item Type" />
+            <TableColumn fx:id="colProductManufacturer" prefWidth="165.0" text="Manufacturer" />
           </columns>
         </TableView>
         <Label alignment="CENTER" layoutX="56.0" layoutY="229.0" prefHeight="21.0" prefWidth="567.0" text="Existing Products" />

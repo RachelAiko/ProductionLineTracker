@@ -24,6 +24,17 @@ public class ProductionRecord {
 
   }
 
+  // creates a record for a produced product with count
+  public ProductionRecord(Product product, int productionCount) {
+
+    this.productionNumber = 0;
+    this.productionId = product.getId();
+   // this.serialNumber = generateSerialNumber();
+    this.dateProduced = new Date();
+
+  }
+
+
   // overloaded constructor used when creating ProductionRecord objects from database
   public ProductionRecord(int productionNumber, int productionId, String serialNumber, Date dateProduced) {
 
@@ -32,6 +43,10 @@ public class ProductionRecord {
     this.serialNumber = serialNumber;
     this.dateProduced = new Date(dateProduced.getTime());
 
+  }
+
+  public static String generateSerialNumber(String manufacturer, ItemType type, int productionCount) {
+    return manufacturer.substring(0, 3).toUpperCase() + type.getCode() + String.format("%05d", productionCount);
   }
 
   // gets the recorded production number
@@ -88,7 +103,8 @@ public class ProductionRecord {
     this.dateProduced = new Date(dateProduced.getTime());
   }
 
-  //@Overide
+
+  //@Override
   public String toString() {
 
     return String.format("Production Num: %d Product Id: %s Serial Num: %s Date: %s",
