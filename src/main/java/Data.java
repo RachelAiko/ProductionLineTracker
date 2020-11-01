@@ -232,7 +232,7 @@ public class Data {
         String name = rs.getString("name");
         String type;
         try {
-          type = ItemType.getCode(rs.getString("type"));
+         // type = ItemType.getCode(rs.getString("type"));
 
         } catch (IllegalArgumentException ex) {
           continue;
@@ -240,7 +240,7 @@ public class Data {
         String manufacturer = rs.getString("manufacturer");
 
         // create a new product of the appropriate class to be returned...
-        products.add(new GenericProduct(name, type, manufacturer, itemType));
+       // products.add(new GenericProduct(name, type, manufacturer));
       }
     } catch (SQLException ex) {
 

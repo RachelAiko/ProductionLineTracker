@@ -11,11 +11,6 @@ public enum ItemType {
 
   }
 
-
-  public static String getCode(String code) {
-    return code;
-  }
-
   public String getCode() {
     return code;
   }

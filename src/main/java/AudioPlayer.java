@@ -52,12 +52,13 @@ public class AudioPlayer extends Product implements MultimediaControl {
 
   @Override
   public ItemType getItemType() {
-    return null;
+    return getType();
   }
 
   @Override
   public void setItemType(ItemType itemType) {
 
   }
+
 }
 

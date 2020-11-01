@@ -7,10 +7,6 @@ public class GenericProduct extends Product {
 
   }
 
-  public GenericProduct(String name, String type, String manufacturer, ItemType itemType) {
-    super(name, itemType, manufacturer);
-  }
-
   @Override
   public ItemType getItemType() {
     return null;
@@ -20,4 +16,5 @@ public class GenericProduct extends Product {
   public void setItemType(ItemType itemType) {
 
   }
+
 }

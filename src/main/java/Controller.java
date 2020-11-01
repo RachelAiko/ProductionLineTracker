@@ -36,8 +36,7 @@ public class Controller {
   public Tab tab1;
   public Tab tab2;
   public Tab tab3;
-/*  @FXML
-  private Label lblOutput;*/
+
 
   @FXML
   private TextField txtManufacturerName;
@@ -92,7 +91,6 @@ public class Controller {
   private void initialize() {
 
     initializeDB();
-   // Data.open();
 
     initializeItemChoice();
 
@@ -155,13 +153,14 @@ public class Controller {
     //Gets product name and manufacturer from GUI
     String name = txtProductName.getText();
     ItemType type = itemChoice.getValue();
-    System.out.println(type);
+    //System.out.println(type);
     String manufacturer= txtManufacturerName.getText();
 
     GenericProduct newProduct = new GenericProduct(name, type, manufacturer);
 
     //setupProduceListview();
-   data.add(newProduct);
+    data.add(newProduct);
+    //System.out.println(data);
 
 
    /* Product newProduct = addProduct(name, type, manufacturer);
@@ -267,7 +266,7 @@ public class Controller {
 
       // add the given properties to the database...
       ps.setString(1, name);
-     // ps.setString(2, type.getCode());
+      //ps.setString(2, type.getCode());
       ps.setString(2,"audio");
       ps.setString(3, manufacturer);
 
