@@ -17,6 +17,7 @@ public abstract class Product implements Item {
   public Product(String name, ItemType itemType, String manufacturer) {
   }
 
+
   public String toString() {
     return "Name: " + name + "\n" + "Manufacturer: " + manufacturer + "\n" + "Type: "
         + type.getCode();

@@ -29,7 +29,7 @@ public class ProductionRecord {
 
     this.productionNumber = 0;
     this.productionId = product.getId();
-   // this.serialNumber = generateSerialNumber();
+    this.serialNumber = getSerialNumber();
     this.dateProduced = new Date();
 
   }

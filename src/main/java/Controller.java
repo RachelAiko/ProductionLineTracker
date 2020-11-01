@@ -13,12 +13,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
@@ -29,6 +31,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.Action;
 
 public class Controller {
 
@@ -99,8 +102,19 @@ public class Controller {
 
     initializeProductionLog();
 
-    //productionLog.addAll(Data.loadProductionLog());
+    //Data.loadProductionLog();
 
+
+    //productionLog.addAll(loadProductionLog());
+
+  }
+
+  //Generates a serial number using the given properties.
+  public static String genSerialNumber(String manufacturer, ItemType type, int productionCount) {
+
+    return manufacturer.substring(0, 3).toUpperCase()
+        + type.getCode()
+        + String.format("%05d", productionCount);
   }
 
   // The list of production records loaded from the database.
@@ -111,6 +125,7 @@ public class Controller {
   //The list of production records loaded from the database.
   private final ObservableList<ProductionRecord> productionLog =
       FXCollections.observableArrayList();
+
 
   //Populates comboBox for quantity
   private void initializeQuantityBox() {
@@ -130,30 +145,38 @@ public class Controller {
 
 
   @FXML
-  private void addProduct() {
+   void addProduct(ActionEvent event) throws SQLException  {
 
     //Prints to terminal when add button is pushed
     System.out.println("Product Added");
-/*
-    //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
+    initializeDB();
+
+    setupProductLineTable();
+    //setupProduceListview();
+
+    //Gets product name and manufacturer from GUI
     String name = txtProductName.getText();
     ChoiceBox<ItemType> type = itemChoice;
     String manufacturer = txtManufacturerName.getText();
 
-    //Product newProduct = addProduct(name, type, manufacturer);
-    //productLine.add(newProduct);*/
+   /* Product newProduct = addProduct(name, type, manufacturer);
+    productLine.add(newProduct);*/
   }
 
   @FXML
-  private void recordProduction() {
+  private void recordProduction(ActionEvent event) throws SQLException {
 
     //Prints to terminal when record production button is pushed
     System.out.println("Production Recorded");
-    //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
+    //Gets product name and manufacturer from GUI
     String name = txtProductName.getText();
-    //String type = itemChoice.
+    ChoiceBox<ItemType> type = itemChoice;
     String manufacturer = txtManufacturerName.getText();
+    //productionLog.settext(toString());
+
+
   }
+
 
   //Initializes the 'products' table data.
   private void setupProductLineTable() {
@@ -164,6 +187,9 @@ public class Controller {
     colProductName.setCellValueFactory(new PropertyValueFactory<>("Name"));
     colProductType.setCellValueFactory(new PropertyValueFactory<>("Type"));
     colProductManufacturer.setCellValueFactory(new PropertyValueFactory<>("Manufacturer"));
+
+    //List<ProductionRecord> records = new ArrayList<>();
+
   }
   //Initializes the 'production log' text area.
   private void initializeProductionLog() {
@@ -215,7 +241,7 @@ public class Controller {
       System.out.println("Inserting records into the table...");
       stmt = conn.createStatement();
 
-      //Gets product name and manufacturer from GUI (STILL WORKING ON IT)
+      //Gets product name and manufacturer from GUI
       String name = txtProductName.getText();
       ChoiceBox<ItemType> type = itemChoice;
       String manufacturer = txtManufacturerName.getText();
@@ -225,13 +251,13 @@ public class Controller {
       //String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
          // + "'Apple')";
 
-      //JDBC PreparedStatement  (YET TO BE IMPLEMENTED)
+      //JDBC PreparedStatement
       PreparedStatement ps = conn
           .prepareStatement("INSERT INTO product (name, type, manufacturer) VALUES (?, ?, ?);");
 
       // add the given properties to the database...
       ps.setString(1, name);
-      ps.setString(2, String.valueOf(type));
+      ps.setString(2, "audio");
       ps.setString(3, manufacturer);
 
       ps.executeUpdate();
@@ -239,6 +265,7 @@ public class Controller {
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
       //stmt.executeUpdate(insertSql);
+
 
       //Prints the contents of the product table to terminal
       ResultSet rs = stmt.executeQuery(sql);
@@ -250,6 +277,7 @@ public class Controller {
         System.out
             .println(id + " " + productName + " " + productType + " " + productManufacturer + " ");
       }
+
 
       // STEP 4: Clean-up environment
       stmt.close();
@@ -264,6 +292,7 @@ public class Controller {
 
 
   }
+
  /* // tests the functionality of user interface
   public static void testMultimedia() {
     AudioPlayer newAudioProduct = new AudioPlayer("DP-X1A", "Onkyo",

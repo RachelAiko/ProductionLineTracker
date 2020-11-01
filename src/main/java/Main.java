@@ -18,8 +18,6 @@ public class Main extends Application {
   public static void main(String[] args) {
     launch(args);
 
-    // connects to the database
-    //Data.open();
   }
 
   @Override
@@ -32,6 +30,17 @@ public class Main extends Application {
     primaryStage.setTitle("Production Line Tracker");
     primaryStage.setScene(scene);
     primaryStage.show();
+
+    // connects to the database
+    //Data.open();
+
+
+  }
+  //@Override
+  //public void stop() {
+
+    // disconnect from the database...
+   // Data.close();
   }
 
-}
+
