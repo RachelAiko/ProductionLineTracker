@@ -45,9 +45,9 @@ public class ProductionRecord {
 
   }
 
-  public static String generateSerialNumber(String manufacturer, ItemType type, int productionCount) {
+ /* public static String generateSerialNumber(String manufacturer, ItemType type, int productionCount) {
     return manufacturer.substring(0, 3).toUpperCase() + type.getCode() + String.format("%05d", productionCount);
-  }
+  }*/
 
   // gets the recorded production number
   public int getProductionNumber() {

@@ -6,9 +6,8 @@ public abstract class Product implements Item {
   private String name;
 
 
-
-  Product( String name, String manufacturer, ItemType type) {
-    this.Id = Id;
+  Product(String name, String manufacturer, ItemType type) {
+    this.Id = 0;
     this.name = name;
     this.manufacturer = manufacturer;
     this.type = type;
@@ -27,6 +26,10 @@ public abstract class Product implements Item {
     return Id;
   }
 
+  public void setId(int Id) {
+    Id = Id;
+  }
+
   public String getManufacturer() {
     return manufacturer;
   }
@@ -40,22 +43,16 @@ public abstract class Product implements Item {
   }
 
   public void setName(String name) {
-    name = name;
+    this.name = name;
   }
 
-  public ItemType getItemType() {
+  public ItemType getType() {
     return type;
   }
 
-  public void setItemType(ItemType itemType) {
-    type = itemType;
+  public void setType(ItemType type) {
+    this.type = type;
   }
 }
 
-class Widget extends Product {
 
-  public Widget(String name, String manufacturer, ItemType itemType) {
-    super(name, manufacturer, itemType); //uses a call to the parents class constructor
-                                         //product is abstract
-  }
-}

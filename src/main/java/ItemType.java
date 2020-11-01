@@ -1,19 +1,16 @@
 public enum ItemType {
 
-  AUDIO("Audio","AU"), VISUAL("Visual","VI"), AUDIO_MOBILE("AudioMobile","AM"), VISUAL_MOBILE("VisualMobile","VM");
+  AUDIO("AU"), VISUAL("VI"), AUDIO_MOBILE("AM"), VISUAL_MOBILE("VM");
 
-  public final String type;
+
   public final String code;
 
-  ItemType(String code, String type) {
+  ItemType(String code) {
 
     this.code = code;
-    this.type = type;
+
   }
 
-  public static String getType(String type) {
-    return type;
-  }
 
   public static String getCode(String code) {
     return code;
@@ -23,8 +20,5 @@ public enum ItemType {
     return code;
   }
 
-  public String getType() {
-    return type;
-  }
 
 }

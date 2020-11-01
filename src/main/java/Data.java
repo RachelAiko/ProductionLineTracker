@@ -1,3 +1,4 @@
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -122,7 +123,7 @@ public class Data {
         throw new IllegalArgumentException("The Manufacturer name must be at least three chars.");
       }
 
-      // add the given properties to the database...
+      // add the given properties to the database
       stmt.setString(1, name);
       stmt.setString(2, type.getCode());
       stmt.setString(3, manufacturer);
@@ -144,7 +145,7 @@ public class Data {
         "INSERT INTO productionRecord (productionId, serialNumber, date) VALUES (?, ?, ?, ?);"
     )) {
 
-      // validate the given properties...
+      // validate the given properties
       if (prod == null) {
         throw new IllegalArgumentException("No product was selected.");
       }
@@ -156,13 +157,13 @@ public class Data {
       List<ProductionRecord> productionRun = new ArrayList<>();
       int productionCount = getProductionCount(prod.getId()) + 1;
 
-      // iterate over the range of the given quantity...
+      // iterate over the range of the given quantity
       for (int i = 0; i < quantity; i++) {
 
         String serialNumber = genSerialNumber(
             prod.getManufacturer(), prod.getItemType(), productionCount++);
 
-        // add the given properties to a new row on the ProductionRecords table...
+        // add the given properties to a new row on the ProductionRecords table
         stmt.setInt(1, prod.getId());
 
         stmt.setString(3, serialNumber);
@@ -192,13 +193,13 @@ public class Data {
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
 
-          // get properties from the result set...
+          // get properties from the result set
           String name = rs.getString("name");
-          ItemType type = ItemType.valueOf(ItemType.getType(rs.getString("type")));
+          //ItemType type = ItemType.valueOf(ItemType.getType(rs.getString("type")));
           String manufacturer = rs.getString("manufacturer");
 
           // return a new product of the appropriate class...
-          return new GenericProduct(name, type, manufacturer);
+          //return new GenericProduct(name, type, manufacturer);
         }
       } catch (IllegalArgumentException ex) {
         return null;
@@ -226,7 +227,7 @@ public class Data {
     ) {
       while (rs.next()) {
 
-        // get properties from the result set...
+        // get properties from the result set
         int id = rs.getInt("id");
         String name = rs.getString("name");
         String type;
@@ -269,7 +270,7 @@ public class Data {
         String serialNumber = rs.getString("serialnumber");
         Timestamp date = rs.getTimestamp("date");
 
-        // create a new production record to be returned...
+        // create a new production record to be returned
         records.add(new ProductionRecord(productionNumber, productionId, serialNumber, date));
       }
 
@@ -353,3 +354,4 @@ public class Data {
   }
 
 }
+

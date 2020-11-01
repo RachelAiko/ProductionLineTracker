@@ -45,4 +45,14 @@ public class MoviePlayer extends Product implements MultimediaControl {
         getScreen(), getMonitorType()
     );
   }
+
+  @Override
+  public ItemType getItemType() {
+    return null;
+  }
+
+  @Override
+  public void setItemType(ItemType itemType) {
+
+  }
 }

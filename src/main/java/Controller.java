@@ -12,10 +12,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.sql.Statement;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -24,22 +24,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.Action;
 
 public class Controller {
 
   public Tab tab1;
   public Tab tab2;
   public Tab tab3;
-  @FXML
-  private Label lblOutput;
+/*  @FXML
+  private Label lblOutput;*/
 
   @FXML
   private TextField txtManufacturerName;
@@ -54,7 +52,7 @@ public class Controller {
    * The 'products' table.
    */
   @FXML
-  private TableView<ProductionRecord> tblProducts;
+  private TableView<GenericProduct> tblProducts;
 
   /**
    * The 'products' table 'id' column.
@@ -88,6 +86,8 @@ public class Controller {
   @FXML
   private ComboBox<String> chooseQuantity;
 
+  ObservableList<GenericProduct> data = FXCollections.observableArrayList();
+
   @FXML
   private void initialize() {
 
@@ -103,9 +103,10 @@ public class Controller {
     initializeProductionLog();
 
     //Data.loadProductionLog();
+    productionLog.addAll();
+    productLine.addAll();
 
-
-    //productionLog.addAll(loadProductionLog());
+    //productionLog.addAll(Data.loadProductionLog());
 
   }
 
@@ -151,16 +152,21 @@ public class Controller {
     System.out.println("Product Added");
     initializeDB();
 
-    setupProductLineTable();
-    //setupProduceListview();
-
     //Gets product name and manufacturer from GUI
     String name = txtProductName.getText();
-    ChoiceBox<ItemType> type = itemChoice;
-    String manufacturer = txtManufacturerName.getText();
+    ItemType type = itemChoice.getValue();
+    System.out.println(type);
+    String manufacturer= txtManufacturerName.getText();
+
+    GenericProduct newProduct = new GenericProduct(name, type, manufacturer);
+
+    //setupProduceListview();
+   data.add(newProduct);
+
 
    /* Product newProduct = addProduct(name, type, manufacturer);
     productLine.add(newProduct);*/
+
   }
 
   @FXML
@@ -168,12 +174,9 @@ public class Controller {
 
     //Prints to terminal when record production button is pushed
     System.out.println("Production Recorded");
-    //Gets product name and manufacturer from GUI
-    String name = txtProductName.getText();
-    ChoiceBox<ItemType> type = itemChoice;
-    String manufacturer = txtManufacturerName.getText();
-    //productionLog.settext(toString());
+    initializeProductionLog();
 
+    productionLog.addAll();
 
   }
 
@@ -181,16 +184,23 @@ public class Controller {
   //Initializes the 'products' table data.
   private void setupProductLineTable() {
 
-    tblProducts.setItems(productLine);
+    //ObservableList<GenericProduct> data = productLine();
 
     colProductId.setCellValueFactory(new PropertyValueFactory<>("Id"));
     colProductName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-    colProductType.setCellValueFactory(new PropertyValueFactory<>("Type"));
+    colProductType.setCellValueFactory(new PropertyValueFactory<>("type"));
     colProductManufacturer.setCellValueFactory(new PropertyValueFactory<>("Manufacturer"));
 
-    //List<ProductionRecord> records = new ArrayList<>();
+    tblProducts.setItems(data);
 
   }
+
+  private ObservableList<GenericProduct> productLine() {
+    //return FXCollections.observableArrayList(productionLog);
+    return FXCollections.observableArrayList();
+
+  }
+
   //Initializes the 'production log' text area.
   private void initializeProductionLog() {
 
@@ -257,7 +267,8 @@ public class Controller {
 
       // add the given properties to the database...
       ps.setString(1, name);
-      ps.setString(2, "audio");
+     // ps.setString(2, type.getCode());
+      ps.setString(2,"audio");
       ps.setString(3, manufacturer);
 
       ps.executeUpdate();

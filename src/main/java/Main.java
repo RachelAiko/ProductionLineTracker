@@ -28,6 +28,7 @@ public class Main extends Application {
     scene.getStylesheets().add(Main.class.getResource("Style.css").toExternalForm());
 
     primaryStage.setTitle("Production Line Tracker");
+    primaryStage.setTitle("Fill TableView with ObservableList");
     primaryStage.setScene(scene);
     primaryStage.show();
 

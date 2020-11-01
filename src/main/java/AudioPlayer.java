@@ -49,5 +49,15 @@ public class AudioPlayer extends Product implements MultimediaControl {
         getSupportedAudioFormats(), getSupportedPlaylistFormats());
 
   }
+
+  @Override
+  public ItemType getItemType() {
+    return null;
+  }
+
+  @Override
+  public void setItemType(ItemType itemType) {
+
+  }
 }
 
