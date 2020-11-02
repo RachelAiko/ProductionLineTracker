@@ -19,7 +19,7 @@ public class ProductionRecord {
 
     this.productionNumber = 0;
     this.productionId = productionId;
-    this.serialNumber = "0";
+    this.serialNumber = getSerialNumber();
     this.dateProduced = new Date();
 
   }
@@ -27,10 +27,15 @@ public class ProductionRecord {
   // creates a record for a produced product with count
   public ProductionRecord(Product product, int productionCount) {
 
-    this.productionNumber = 0;
+    ItemType type = product.getType();
+    String paddedNumOfProduct = String.format("%05d", productionCount);
+    String manufacturer = product.getManufacturer().substring(0, 3);
+    serialNumber = manufacturer + type.code + paddedNumOfProduct;
+    dateProduced = new Date();
+    /*this.productionNumber = 0;
     this.productionId = product.getId();
     this.serialNumber = getSerialNumber();
-    this.dateProduced = new Date();
+    this.dateProduced = getDateProduced();*/
 
   }
 
@@ -41,13 +46,14 @@ public class ProductionRecord {
     this.productionNumber = productionNumber;
     this.productionId = productionId;
     this.serialNumber = serialNumber;
-    this.dateProduced = new Date(dateProduced.getTime());
+    //this.dateProduced = new Date(dateProduced.getTime());
+   // this.dateProduced = getDateProduced();
 
   }
 
- /* public static String generateSerialNumber(String manufacturer, ItemType type, int productionCount) {
+  public static String generateSerialNumber(String manufacturer, ItemType type, int productionCount) {
     return manufacturer.substring(0, 3).toUpperCase() + type.getCode() + String.format("%05d", productionCount);
-  }*/
+  }
 
   // gets the recorded production number
   public int getProductionNumber() {
@@ -103,6 +109,13 @@ public class ProductionRecord {
     this.dateProduced = new Date(dateProduced.getTime());
   }
 
+  //Generates a serial number using the given properties.
+  public String genSerialNumber(String manufacturer, ItemType type, int productionCount) {
+
+    return manufacturer.substring(0, 3).toUpperCase()
+        + type.getCode()
+        + String.format("%05d", productionCount);
+  }
 
   //@Override
   public String toString() {
