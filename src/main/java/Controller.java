@@ -83,8 +83,6 @@ public class Controller {
 
     setupProductLineTable();
 
-    //initializeProductionLog();
-
   }
 
   //The list of production records loaded from the database.
@@ -135,12 +133,10 @@ public class Controller {
     System.out.println("Production Recorded");
 
     ObservableList selectedIndices = listViewProduce.getSelectionModel().getSelectedIndices();
-   // TxtProductionLog.setText(String.valueOf(productLine));
     for (int i = 0; i < Integer.parseInt(chooseQuantity.getValue()); i++) {
       for (Object o : selectedIndices) {
         ProductionRecord record = new ProductionRecord(productLine.get((int) o), i);
-        TxtProductionLog.setText(record.toString());
-        //TxtProductionLog.setText(TxtProductionLog.getText() + "\n" + record.toString());
+        TxtProductionLog.setText(TxtProductionLog.getText() + "\n" + record.toString());
       }
     }
 

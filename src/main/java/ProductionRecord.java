@@ -41,18 +41,21 @@ public class ProductionRecord {
 
 
   // overloaded constructor used when creating ProductionRecord objects from database
-  public ProductionRecord(int productionNumber, int productionId, String serialNumber, Date dateProduced) {
+  public ProductionRecord(int productionNumber, int productionId, String serialNumber,
+      Date dateProduced) {
 
     this.productionNumber = productionNumber;
     this.productionId = productionId;
     this.serialNumber = serialNumber;
     //this.dateProduced = new Date(dateProduced.getTime());
-   // this.dateProduced = getDateProduced();
+    // this.dateProduced = getDateProduced();
 
   }
 
-  public static String generateSerialNumber(String manufacturer, ItemType type, int productionCount) {
-    return manufacturer.substring(0, 3).toUpperCase() + type.getCode() + String.format("%05d", productionCount);
+  public static String generateSerialNumber(String manufacturer, ItemType type,
+      int productionCount) {
+    return manufacturer.substring(0, 3).toUpperCase() + type.getCode() + String
+        .format("%05d", productionCount);
   }
 
   // gets the recorded production number
@@ -97,7 +100,7 @@ public class ProductionRecord {
   }
 
   // gets the recorded date of production
-  public Date getDateProduced () {
+  public Date getDateProduced() {
 
     return new Date(dateProduced.getTime());
 

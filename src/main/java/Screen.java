@@ -14,7 +14,6 @@ public class Screen implements ScreenSpec {
   }
 
 
-
   @Override
   public String getResolution() {
     return resolution;
