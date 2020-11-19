@@ -12,12 +12,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Objects;
 import java.sql.Statement;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,6 +63,12 @@ public class Controller {
   @FXML
   private ChoiceBox<ItemType> itemChoice;
 
+  /**
+   * This is the Connection object used by all of the methods that write to or read from the
+   * database.
+   */
+  private Connection conn;
+
   @FXML
   private ComboBox<String> chooseQuantity;
 
@@ -86,9 +88,15 @@ public class Controller {
   }
 
   //The list of production records loaded from the database.
-  private final ObservableList<ProductionRecord> productionLog =
+  private final ObservableList<ProductionRecords> productionLog =
       FXCollections.observableArrayList();
 
+  /**
+   * This ObservableList is used to display information about the products to the ChooseProduct
+   * ListView.
+   */
+  private final ObservableList<String> observableProductStrings =
+      FXCollections.observableArrayList();
 
   //Populates comboBox for quantity
   private void initializeQuantityBox() {
@@ -113,7 +121,7 @@ public class Controller {
     //Prints to terminal when add button is pushed
     System.out.println("Product Added");
 
-    initializeDB();
+    //initializeDB();
 
     //Gets product name and manufacturer from GUI
     String name = txtProductName.getText();
@@ -135,7 +143,7 @@ public class Controller {
     ObservableList selectedIndices = listViewProduce.getSelectionModel().getSelectedIndices();
     for (int i = 0; i < Integer.parseInt(chooseQuantity.getValue()); i++) {
       for (Object o : selectedIndices) {
-        ProductionRecord record = new ProductionRecord(productLine.get((int) o), i);
+        ProductionRecords record = new ProductionRecords(productLine.get((int) o), i);
         TxtProductionLog.setText(TxtProductionLog.getText() + "\n" + record.toString());
       }
     }
@@ -248,4 +256,3 @@ public class Controller {
     }
   }*/
 }
-

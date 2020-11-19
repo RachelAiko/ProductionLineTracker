@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class ProductionRecord {
+public class ProductionRecords {
 
   // unique production number of the record
   private int productionNumber;
@@ -15,7 +15,7 @@ public class ProductionRecord {
   private Date dateProduced;
 
   // creates a record for a new product
-  public ProductionRecord(int productionId) {
+  public ProductionRecords(int productionId) {
 
     this.productionNumber = 0;
     this.productionId = productionId;
@@ -25,7 +25,7 @@ public class ProductionRecord {
   }
 
   // creates a record for a produced product with count
-  public ProductionRecord(Product product, int productionCount) {
+  public ProductionRecords(Product product, int productionCount) {
 
     ItemType type = product.getType();
     String paddedNumOfProduct = String.format("%05d", productionCount);
@@ -41,7 +41,7 @@ public class ProductionRecord {
 
 
   // overloaded constructor used when creating ProductionRecord objects from database
-  public ProductionRecord(int productionNumber, int productionId, String serialNumber,
+  public ProductionRecords(int productionNumber, int productionId, String serialNumber,
       Date dateProduced) {
 
     this.productionNumber = productionNumber;
@@ -127,5 +127,4 @@ public class ProductionRecord {
         productionNumber, productionId, serialNumber, dateProduced
     );
   }
-
 }

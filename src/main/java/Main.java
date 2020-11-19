@@ -25,7 +25,7 @@ public class Main extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 
     Scene scene = new Scene(root, 680, 580);
-    scene.getStylesheets().add(Main.class.getResource("Style.css").toExternalForm());
+    scene.getStylesheets().add(Main.class.getResource("style.css").toExternalForm());
 
     primaryStage.setTitle("Production Line Tracker");
     //primaryStage.setTitle("Fill TableView with ObservableList");
