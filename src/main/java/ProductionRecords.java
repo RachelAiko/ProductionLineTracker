@@ -1,6 +1,15 @@
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: ProductionRecords.java
+ *
+ * Defines the ProductionRecords class.
+ */
+
 import java.util.Date;
 
-public class ProductionRecord {
+public class ProductionRecords {
 
   // unique production number of the record
   private int productionNumber;
@@ -15,23 +24,47 @@ public class ProductionRecord {
   private Date dateProduced;
 
   // creates a record for a new product
-  public ProductionRecord(int productionId) {
+  public ProductionRecords(int productionId) {
 
     this.productionNumber = 0;
     this.productionId = productionId;
-    this.serialNumber = "0";
+    this.serialNumber = getSerialNumber();
     this.dateProduced = new Date();
 
   }
 
+  // creates a record for a produced product with count
+  public ProductionRecords(Product product, int productionCount) {
+
+    ItemType type = product.getType();
+    String paddedNumOfProduct = String.format("%05d", productionCount);
+    String manufacturer = product.getManufacturer().substring(0, 3);
+    serialNumber = manufacturer + type.code + paddedNumOfProduct;
+    dateProduced = new Date();
+    /*this.productionNumber = 0;
+    this.productionId = product.getId();
+    this.serialNumber = getSerialNumber();
+    this.dateProduced = getDateProduced();*/
+
+  }
+
+
   // overloaded constructor used when creating ProductionRecord objects from database
-  public ProductionRecord(int productionNumber, int productionId, String serialNumber, Date dateProduced) {
+  public ProductionRecords(int productionNumber, int productionId, String serialNumber,
+      Date dateProduced) {
 
     this.productionNumber = productionNumber;
     this.productionId = productionId;
     this.serialNumber = serialNumber;
-    this.dateProduced = new Date(dateProduced.getTime());
+    //this.dateProduced = new Date(dateProduced.getTime());
+    // this.dateProduced = getDateProduced();
 
+  }
+
+  public static String generateSerialNumber(String manufacturer, ItemType type,
+      int productionCount) {
+    return manufacturer.substring(0, 3).toUpperCase() + type.getCode() + String
+        .format("%05d", productionCount);
   }
 
   // gets the recorded production number
@@ -76,7 +109,7 @@ public class ProductionRecord {
   }
 
   // gets the recorded date of production
-  public Date getDateProduced () {
+  public Date getDateProduced() {
 
     return new Date(dateProduced.getTime());
 
@@ -88,12 +121,19 @@ public class ProductionRecord {
     this.dateProduced = new Date(dateProduced.getTime());
   }
 
-  //@Overide
+  //Generates a serial number using the given properties.
+  public String genSerialNumber(String manufacturer, ItemType type, int productionCount) {
+
+    return manufacturer.substring(0, 3).toUpperCase()
+        + type.getCode()
+        + String.format("%05d", productionCount);
+  }
+
+  //@Override
   public String toString() {
 
     return String.format("Production Num: %d Product Id: %s Serial Num: %s Date: %s",
         productionNumber, productionId, serialNumber, dateProduced
     );
   }
-
 }

@@ -1,3 +1,12 @@
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: Screen.java
+ *
+ * Defines the Screen class.
+ */
+
 public class Screen implements ScreenSpec {
 
   private final String resolution;
@@ -12,7 +21,6 @@ public class Screen implements ScreenSpec {
     this.refreshRate = refreshRate;
     this.responseTime = responseTime;
   }
-
 
 
   @Override

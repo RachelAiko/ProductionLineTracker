@@ -1,11 +1,21 @@
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: MoviePlayer.java
+ *
+ * Defines the MoviePlayer class.
+ */
+
 public class MoviePlayer extends Product implements MultimediaControl {
 
-  private Screen screen;
-  private MonitorType monitorType;
+  private final Screen screen;
+  private final MonitorType monitorType;
 
-  public MoviePlayer(String name, String manufacturer, Screen screen, MonitorType monitorType) {
+  public MoviePlayer(String name, String manufacturer, Screen screen, MonitorType monitorType,
+      int lastId) {
 
-    super(name, manufacturer, ItemType.VISUAL);
+    super(lastId, name, manufacturer, ItemType.VISUAL);
     this.screen = screen;
     this.monitorType = monitorType;
   }
@@ -44,5 +54,15 @@ public class MoviePlayer extends Product implements MultimediaControl {
         "%nScreen: %s%nMonitorType: %s",
         getScreen(), getMonitorType()
     );
+  }
+
+  @Override
+  public ItemType getItemType() {
+    return null;
+  }
+
+  @Override
+  public void setItemType(ItemType itemType) {
+
   }
 }
