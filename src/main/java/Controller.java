@@ -1,4 +1,4 @@
-/*
+/**
  * AUTH: Rachel Matthews
  * DATE: Sat, Sep 19th, 2020
  * PROJ: ProductionLineTracker
@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -32,6 +33,9 @@ public class Controller {
   public Tab tab1;
   public Tab tab2;
   public Tab tab3;
+  public Tab tab4;
+  public Button addProduct;
+  public Button recordProduction;
 
   @FXML
   private TextField txtManufacturerName;
@@ -63,16 +67,22 @@ public class Controller {
   @FXML
   private ChoiceBox<ItemType> itemChoice;
 
-  /**
-   * This is the Connection object used by all of the methods that write to or read from the
-   * database.
-   */
-  private Connection conn;
-
   @FXML
   private ComboBox<String> chooseQuantity;
 
-  ObservableList<GenericProduct> productLine = FXCollections.observableArrayList();
+  @FXML
+  private TextField fullNameTextField;
+
+  @FXML
+  private TextField passwordField;
+
+  @FXML
+  private Button loginButton;
+
+  @FXML
+  private Button createAccount;
+
+  final ObservableList<GenericProduct> productLine = FXCollections.observableArrayList();
 
   @FXML
   private void initialize() {
@@ -105,6 +115,7 @@ public class Controller {
       chooseQuantity.getSelectionModel().selectFirst();
       chooseQuantity.setEditable(true);
     }
+    chooseQuantity.setEditable(true);
   }
 
   //Populates choice box for Item Type
@@ -121,7 +132,7 @@ public class Controller {
     //Prints to terminal when add button is pushed
     System.out.println("Product Added");
 
-    //initializeDB();
+    initializeDB();
 
     //Gets product name and manufacturer from GUI
     String name = txtProductName.getText();
@@ -160,6 +171,15 @@ public class Controller {
 
     tblProducts.setItems(productLine);
     listViewProduce.setItems(productLine);
+
+  }
+
+  public void addEmployees() {
+
+    initializeDB();
+
+    String employeeName = fullNameTextField.getText();
+    String password = passwordField.getText();
 
   }
 
@@ -202,7 +222,6 @@ public class Controller {
 
       // add the given properties to the database...
       ps.setString(1, name);
-      //ps.setString(2, type.getCode());
       ps.setString(2, "audio");
       ps.setString(3, manufacturer);
 
@@ -211,6 +230,11 @@ public class Controller {
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
       //stmt.executeUpdate(insertSql);
+     /* //Gets Employee information from the GUI
+      String employeeName = fullNameTextField.getText();
+      String password = passwordField.getText();
+      PreparedStatement ps1 = conn
+          .prepareStatement("INSERT INTO product (employeeName, password) VALUES (?, ?);");*/
 
       //Prints the contents of the product table to terminal
       ResultSet rs = stmt.executeQuery(sql);
@@ -227,11 +251,9 @@ public class Controller {
       stmt.close();
       conn.close();
       rs.close();
-    } catch (ClassNotFoundException e) {
+    } catch (ClassNotFoundException | SQLException e) {
       e.printStackTrace();
 
-    } catch (SQLException e) {
-      e.printStackTrace();
     }
 
 

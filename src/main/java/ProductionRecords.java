@@ -1,3 +1,12 @@
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: ProductionRecords.java
+ *
+ * Defines the ProductionRecords class.
+ */
+
 import java.util.Date;
 
 public class ProductionRecords {

@@ -1,4 +1,11 @@
-
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: GenericProduct.java
+ *
+ * Defines the GenericProduct class.
+ */
 
 public class GenericProduct extends Product {
 

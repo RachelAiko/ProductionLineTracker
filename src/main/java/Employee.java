@@ -1,9 +1,6 @@
 /**
- * AUTH: Rachel Matthews
- * DATE: Fall 2020
- * PROJ: ProductionLineTracker
- * FILE: Employee.java
- *
+ * AUTH: Rachel Matthews DATE: Fall 2020 PROJ: ProductionLineTracker FILE: Employee.java
+ * <p>
  * Defines the Employee class.
  */
 
@@ -16,16 +13,18 @@ import java.util.regex.Pattern;
  *
  * @author Rachel Matthews
  */
+@SuppressWarnings("DuplicatedCode")
 class Employee {
 
   /** This field holds the employee's full name with a space between their first and last name. */
-  private StringBuilder name;
+  private StringBuilder employeeName;
   /** This field holds the username created from the employee's full name. */
   private String username;
   /** This field holds the password used by the employee. */
-  private String password;
+  private final String password;
   /** This field holds the employee's email address. */
   private String email;
+  private String manufacturer;
 
   /**
    * This is the constructor for the Employee class, it takes in the full name of the user and a
@@ -39,7 +38,7 @@ class Employee {
     StringBuilder builderName = new StringBuilder(name);
 
     // Setting name
-    this.name = builderName;
+    this.employeeName = builderName;
 
     // Checking for valid name
     if (checkName(builderName)) {
@@ -148,8 +147,17 @@ class Employee {
    *
    * @return The name of the employee
    */
-  public StringBuilder getName() {
-    return name;
+  public StringBuilder getEmployeeName() {
+    return employeeName;
+  }
+
+  public void setEmployeeName(StringBuilder employeeName) {
+    this.employeeName = employeeName;
+
+  }
+
+  public void setManufacturer(String manufacturer) {
+    this.manufacturer = manufacturer;
   }
 
   /**
@@ -180,7 +188,7 @@ class Employee {
   public String toString() {
 
     return "Employee Details\n"
-        + "Name : " + name + "\n"
+        + "Name : " + employeeName + "\n"
         + "Username : " + username + "\n"
         + "Email : " + email + "\n"
         + "Initial Password : " + password;

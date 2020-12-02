@@ -1,3 +1,12 @@
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: MoviePlayer.java
+ *
+ * Defines the MoviePlayer class.
+ */
+
 public class MoviePlayer extends Product implements MultimediaControl {
 
   private final Screen screen;

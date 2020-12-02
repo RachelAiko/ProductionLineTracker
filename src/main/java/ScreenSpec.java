@@ -1,11 +1,18 @@
-/* interface for accessing screen specification */
+/**
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: Screen.java
+ *
+ * Defines the Screen interface for accessing screen specification.
+ */
 
 public interface ScreenSpec {
 
-  public String getResolution();
+  String getResolution();
 
-  public int getRefreshRate();
+  int getRefreshRate();
 
-  public int getResponseTime();
+  int getResponseTime();
 
 }
