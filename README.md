@@ -13,7 +13,7 @@ Object Oriented Production Line Tracker with a GUI and database. This is my Obje
 It is a Java FX application that simulated a production line management system and uses Gradle to handle dependencies.
 
 ## Demonstration
-![A demonstrative GIF of the application](demo.gif)*********edit
+![A demonstrative GIF of the application](https://github.com/RachelAiko/ProductionLineTracker/blob/master/ProductionLineTracker.gif)
 
 ## Documentation
 [ProductionLineTracker JavaDocs](https://github.com/RachelAiko/ProductionLineTracker/blob/master/docs/index.html)
