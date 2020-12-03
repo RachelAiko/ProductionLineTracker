@@ -14,7 +14,7 @@ public class GenericProduct extends Product {
 
   }
 
-  public GenericProduct(int lastId, String name, String manufacturer, ItemType item) {
+  public GenericProduct(int lastId, String name, String manufacturer, String item) {
     super(lastId, name, manufacturer, item);
   }
 

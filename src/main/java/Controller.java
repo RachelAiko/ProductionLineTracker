@@ -1,9 +1,7 @@
 /**
- * AUTH: Rachel Matthews
- * DATE: Sat, Sep 19th, 2020
- * PROJ: ProductionLineTracker
- * FILE: Controller.java
- *
+ * AUTH: Rachel Matthews DATE: Sat, Sep 19th, 2020 PROJ: ProductionLineTracker FILE:
+ * Controller.java
+ * <p>
  * Defines the Controller class.
  */
 
@@ -27,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 
 public class Controller {
 
@@ -142,6 +141,15 @@ public class Controller {
     GenericProduct newProduct = new GenericProduct(name, type, manufacturer);
 
     productLine.add(newProduct);
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("A product name was not given.");
+    }
+    if (type == null) {
+      throw new IllegalArgumentException("A product type was not selected.");
+    }
+    if (manufacturer == null || manufacturer.length() < 3) {
+      throw new IllegalArgumentException("The Manufacturer name must be at least three chars.");
+    }
 
   }
 
@@ -245,6 +253,14 @@ public class Controller {
         String productManufacturer = rs.getString(4);
         System.out
             .println(id + " " + productName + " " + productType + " " + productManufacturer + " ");
+
+        // Loads the production table
+        productLine.add(
+            new GenericProduct(
+                rs.getInt("ID"),
+                rs.getString("Name"),
+                rs.getString("Manufacturer"),
+                rs.getString("Type")));
       }
 
       // STEP 4: Clean-up environment
