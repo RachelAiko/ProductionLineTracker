@@ -25,7 +25,7 @@ The project's class diagram:
 
 The project's database diagram:
 
-![A diagram of the project's database](diagram_database.png) ********edit
+![A diagram of the project's database](https://github.com/RachelAiko/ProductionLineTracker/blob/master/Database%20Diagrams.png)
 
 ## Getting Started
 An executable jar copy of my program:
