@@ -52,11 +52,10 @@ Rachel Matthews <ramatthews7888@eagle.fgcu.edu>
 
 ## Problem Statement
 -   **Goals**
-        1.  Reinforce understanding of object oriented programming concepts.
-        2.  Practice Java programming.
-        3.  Learn basic graphical user interface (GUI) programming using Java FX and Scene Builder.
-        4.  Learn basic database programming.
-        4.  Learn basic database programming.
+      1.  Reinforce understanding of object oriented programming concepts.
+      2.  Practice Java programming.
+      3.  Learn basic graphical user interface (GUI) programming using Java FX and Scene Builder.
+      4.  Learn basic database programming.
 -   **Boundaries / Scope**
 
 -   **Success criteria** 
