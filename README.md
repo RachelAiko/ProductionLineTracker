@@ -16,7 +16,7 @@ It is a Java FX application that simulated a production line management system a
 ![A demonstrative GIF of the application](demo.gif)*********edit
 
 ## Documentation
-[ProductionLineTracker JavaDocs](https://RachelAiko.github.io/ProductionLineTracker/)************edit
+[ProductionLineTracker JavaDocs](file:///C:/Users/Rachel/Google%20Drive/1.%20Fall%20Semester%202020/Object%20Oriented%20Programming/Production%20Line%20Tracker/docs/Launcher.html)
 
 ## Diagrams
 The project's class diagram:
