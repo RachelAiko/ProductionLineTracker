@@ -54,6 +54,10 @@ Rachel Matthews <ramatthews7888@eagle.fgcu.edu>
 - Using Regex
 - Designing recursive functions
 
+## Acknowledgments
+
+* w3scholls.com
+* Vladimir Hardy - TA for COP 3003
 
    
 
