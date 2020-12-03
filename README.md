@@ -21,7 +21,8 @@ It is a Java FX application that simulated a production line management system a
 ## Diagrams
 The project's class diagram:
 
-![A diagram of the project's classes](Class Diagrams.png) ********edit
+![A diagram of the project's classes](Class Diagrams.png) 
+
 The project's database diagram:
 
 ![A diagram of the project's database](diagram_database.png) ********edit
