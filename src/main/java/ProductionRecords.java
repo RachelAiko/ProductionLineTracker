@@ -1,4 +1,4 @@
-/**
+/*
  * AUTH: Rachel Matthews
  * DATE: Sat, Sep 19th, 2020
  * PROJ: ProductionLineTracker
@@ -9,21 +9,34 @@
 
 import java.util.Date;
 
+
+/**
+ * Represents the production records.
+ *
+ * Creates a production record.
+ *
+ * @author Rachel Matthews
+ */
 public class ProductionRecords {
 
-  // unique production number of the record
+  // Unique production number of the record.
   private int productionNumber;
 
-  // id number of the product being produced
+  // Id number of the product being produced.
   private int productionId;
 
-  // the serial number of the product
+  // The serial number of the product.
   private String serialNumber;
 
-  // the date of production
+  // The date of production.
   private Date dateProduced;
 
-  // creates a record for a new product
+
+  /**
+   * Creates a record for a new product
+   *
+   * @param productionId The production number of the product.
+   */
   public ProductionRecords(int productionId) {
 
     this.productionNumber = 0;

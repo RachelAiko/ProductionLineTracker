@@ -1,4 +1,4 @@
-/**
+/*
  * AUTH: Rachel Matthews
  * DATE: Sat, Sep 19th, 2020
  * PROJ: ProductionLineTracker
@@ -7,6 +7,11 @@
  * Defines the GenericProduct class.
  */
 
+/**
+ * This class creates an object that is a generic representation of a product.
+ *
+ * @author Rachel Matthews
+ */
 public class GenericProduct extends Product {
 
   public GenericProduct(String name, ItemType type, String manufacturer) {
@@ -14,15 +19,10 @@ public class GenericProduct extends Product {
 
   }
 
-  public GenericProduct(int lastId, String name, String manufacturer, ItemType item) {
-    super(lastId, name, manufacturer, item);
+  public GenericProduct(int lastId, String name, String manufacturer, String item) {
+    super(lastId, name, manufacturer, ItemType.valueOf(item));
   }
 
-  /* public GenericProduct(int Id, String name, ItemType type, String manufacturer) {
-     super(Id,name, type, manufacturer);
-
-   }
- */
   @Override
   public ItemType getItemType() {
     return type;

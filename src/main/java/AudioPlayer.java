@@ -1,4 +1,4 @@
-/**
+/*
  * AUTH: Rachel Matthews
  * DATE: Sat, Sep 19th, 2020
  * PROJ: ProductionLineTracker
@@ -96,8 +96,9 @@ public class AudioPlayer extends Product implements MultimediaControl {
   @Override
   public String toString() {
 
-    return super.toString() + String.format( "%nSupported Audio Formats: %s%nSupported Playlist Formats: %s",
-        getSupportedAudioFormats(), getSupportedPlaylistFormats());
+    return super.toString() + String
+        .format("%nSupported Audio Formats: %s%nSupported Playlist Formats: %s",
+            getSupportedAudioFormats(), getSupportedPlaylistFormats());
 
   }
 
