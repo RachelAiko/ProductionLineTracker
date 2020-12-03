@@ -1,6 +1,9 @@
-/**
- * AUTH: Rachel Matthews DATE: Fall 2020 PROJ: ProductionLineTracker FILE: Employee.java
- * <p>
+/*
+ * AUTH: Rachel Matthews
+ * DATE: Fall 2020
+ * PROJ: ProductionLineTracker
+ * FILE: Employee.java
+ *
  * Defines the Employee class.
  */
 
@@ -13,16 +16,23 @@ import java.util.regex.Pattern;
  *
  * @author Rachel Matthews
  */
-@SuppressWarnings("DuplicatedCode")
 class Employee {
 
-  /** This field holds the employee's full name with a space between their first and last name. */
+  /**
+   * This field holds the employee's full name with a space between their first and last name.
+   */
   private StringBuilder employeeName;
-  /** This field holds the username created from the employee's full name. */
+  /**
+   * This field holds the username created from the employee's full name.
+   */
   private String username;
-  /** This field holds the password used by the employee. */
+  /**
+   * This field holds the password used by the employee.
+   */
   private final String password;
-  /** This field holds the employee's email address. */
+  /**
+   * This field holds the employee's email address.
+   */
   private String email;
   private String manufacturer;
 
@@ -30,7 +40,7 @@ class Employee {
    * This is the constructor for the Employee class, it takes in the full name of the user and a
    * password that they enter.
    *
-   * @param name The full name entered by the user
+   * @param name     The full name entered by the user
    * @param password The password entered by the user
    */
   Employee(String name, String password) {
@@ -113,8 +123,8 @@ class Employee {
    * This method checks that the password the user entered contains an uppercase character, a
    * lowercase character, and a symbol.
    *
-   * @param password The password the user entered
-   * @return Boolean representing if that password is acceptable or not
+   * @param password The password the user entered.
+   * @return Boolean representing if that password is acceptable or not.
    */
   private boolean isValidPassword(String password) {
     final String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]*$";
@@ -122,7 +132,7 @@ class Employee {
     final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
     final Matcher matcher = pattern.matcher(password);
 
-    // If the password has a lowercase letter, uppercase letter, and symbol
+    // If the password has a lowercase letter, uppercase letter, and symbol.
     return matcher.find();
   }
 
@@ -138,7 +148,7 @@ class Employee {
     final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
     final Matcher matcher = pattern.matcher(name);
 
-    // If there is a space return true else return false
+    // If there is a space return true else return false.
     return matcher.find();
   }
 
@@ -192,5 +202,9 @@ class Employee {
         + "Username : " + username + "\n"
         + "Email : " + email + "\n"
         + "Initial Password : " + password;
+  }
+
+  public String getManufacturer() {
+    return manufacturer;
   }
 }

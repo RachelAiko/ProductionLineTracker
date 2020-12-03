@@ -1,7 +1,9 @@
-/**
- * AUTH: Rachel Matthews DATE: Sat, Sep 19th, 2020 PROJ: ProductionLineTracker FILE:
- * Controller.java
- * <p>
+/*
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: Controller.java
+ *
  * Defines the Controller class.
  */
 
@@ -43,7 +45,7 @@ public class Controller {
   private TextField txtProductName;
 
   @FXML
-  private TextArea TxtProductionLog;
+  private TextArea txtProductionLog;
 
   @FXML
   private TableView<GenericProduct> tblProducts;
@@ -96,7 +98,9 @@ public class Controller {
 
   }
 
-  //The list of production records loaded from the database.
+  /**
+   * The list of production records loaded from the database.
+   */
   private final ObservableList<ProductionRecords> productionLog =
       FXCollections.observableArrayList();
 
@@ -107,7 +111,9 @@ public class Controller {
   private final ObservableList<String> observableProductStrings =
       FXCollections.observableArrayList();
 
-  //Populates comboBox for quantity
+  /**
+   * Populates comboBox for quantity.
+   */
   private void initializeQuantityBox() {
     for (int count = 1; count <= 10; count++) {
       chooseQuantity.getItems().add(String.valueOf(count));
@@ -117,14 +123,18 @@ public class Controller {
     chooseQuantity.setEditable(true);
   }
 
-  //Populates choice box for Item Type
+  /**
+   * Populates choice box for Item Type.
+   */
   private void initializeItemChoice() {
     itemChoice.getItems().clear();
     itemChoice.getItems().addAll(ItemType.values());
     itemChoice.getSelectionModel().selectFirst();
   }
 
-
+  /**
+   * Handles when the add product button is pushed.
+   */
   @FXML
   void addProduct(ActionEvent event) throws SQLException {
 
@@ -141,18 +151,22 @@ public class Controller {
     GenericProduct newProduct = new GenericProduct(name, type, manufacturer);
 
     productLine.add(newProduct);
-    if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("A product name was not given.");
+    if ((name == null) || name.isEmpty()) {
+      throw new IllegalArgumentException("Please enter a product name.");
     }
     if (type == null) {
-      throw new IllegalArgumentException("A product type was not selected.");
+      throw new IllegalArgumentException("Please select a product type.");
     }
-    if (manufacturer == null || manufacturer.length() < 3) {
-      throw new IllegalArgumentException("The Manufacturer name must be at least three chars.");
+    if ((manufacturer == null) || (manufacturer.length() < 3)) {
+      throw new IllegalArgumentException(
+          "The Manufacturer name must be at least three characters long.");
     }
 
   }
 
+  /**
+   * Handles when the record button is pushed.
+   */
   @FXML
   private void recordProduction(ActionEvent event) throws SQLException {
 
@@ -163,13 +177,15 @@ public class Controller {
     for (int i = 0; i < Integer.parseInt(chooseQuantity.getValue()); i++) {
       for (Object o : selectedIndices) {
         ProductionRecords record = new ProductionRecords(productLine.get((int) o), i);
-        TxtProductionLog.setText(TxtProductionLog.getText() + "\n" + record.toString());
+        txtProductionLog.setText(txtProductionLog.getText() + "\n" + record.toString());
       }
     }
 
   }
 
-  //Initializes the 'products' table data.
+  /**
+   * Initializes the 'products' table data.
+   */
   private void setupProductLineTable() {
 
     colProductId.setCellValueFactory(new PropertyValueFactory<>("Id"));
@@ -182,16 +198,35 @@ public class Controller {
 
   }
 
-  public void addEmployees() {
-
-    initializeDB();
+  /**
+   * Adds employees to the database employees table.
+   *
+   * <p>
+   * Gets the employee's name and password from text fields and enters it into the database.
+   * </p>
+   *
+   * @param conn Checks for database connection.
+   */
+  public void addEmployees(Connection conn) throws SQLException {
 
     String employeeName = fullNameTextField.getText();
     String password = passwordField.getText();
+    PreparedStatement ps = conn
+        .prepareStatement("INSERT INTO product (name, type, manufacturer) VALUES (?, ?, ?);");
+
+    // add the given properties to the database...
+    ps.setString(1, employeeName);
+    ps.setString(2, password);
+
+    ps.executeUpdate();
+
+    String sql = "SELECT  employeeName, password FROM Employees ";
 
   }
 
-  //Opens database connection. Executes query Cleans up and closes connection
+  /**
+   * Opens database connection. Executes query Cleans up and closes connection
+   */
   public void initializeDB() {
     final String Jdbc_Driver = "org.h2.Driver";
     final String Db_url = "jdbc:h2:./resources/PLdb";
@@ -221,8 +256,8 @@ public class Controller {
       String manufacturer = txtManufacturerName.getText();
 
       //Hard codes a product into database table product
-      //String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
-      // + "'Apple')";
+      String insertSql = "INSERT INTO product(Name, Type, Manufacturer ) VALUES ( 'iPod', 'Audio', "
+          + "'Apple')";
 
       //JDBC PreparedStatement
       PreparedStatement ps = conn
@@ -237,12 +272,11 @@ public class Controller {
 
       String sql = "SELECT id, name, type, manufacturer" + " FROM PRODUCT ";
 
-      //stmt.executeUpdate(insertSql);
-     /* //Gets Employee information from the GUI
+      //Gets Employee information from the GUI
       String employeeName = fullNameTextField.getText();
       String password = passwordField.getText();
       PreparedStatement ps1 = conn
-          .prepareStatement("INSERT INTO product (employeeName, password) VALUES (?, ?);");*/
+          .prepareStatement("INSERT INTO product (employeeName, password) VALUES (?, ?);");
 
       //Prints the contents of the product table to terminal
       ResultSet rs = stmt.executeQuery(sql);
@@ -275,7 +309,35 @@ public class Controller {
 
   }
 
- /* // tests the functionality of user interface
+  public ObservableList<ProductionRecords> getProductionLog() {
+    return productionLog;
+  }
+
+  public ObservableList<String> getObservableProductStrings() {
+    return observableProductStrings;
+  }
+
+  public Button getLoginButton() {
+    return loginButton;
+  }
+
+  public void setLoginButton(Button loginButton) {
+    this.loginButton = loginButton;
+  }
+
+  public Button getCreateAccount() {
+    return createAccount;
+  }
+
+  public void setCreateAccount(Button createAccount) {
+    this.createAccount = createAccount;
+  }
+
+  public void setTxtProductionLog(TextArea txtProductionLog) {
+    this.txtProductionLog = txtProductionLog;
+  }
+
+  /*  Tests the functionality of user interface.
   public static void testMultimedia() {
     AudioPlayer newAudioProduct = new AudioPlayer("DP-X1A", "Onkyo",
         "DSD/FLAC/ALAC/WAV/AIFF/MQA/Ogg-Vorbis/MP3/AAC", "M3U/PLS/WPL");
