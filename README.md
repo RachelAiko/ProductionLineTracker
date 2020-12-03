@@ -7,28 +7,30 @@
   A description of the Production Line tracker project.
 -->
 # ProductionLineTracker
-Project for COP 3003
+Project for COP 3003 - Object Oriented Programming
 ## Project Details
 Object Oriented Production Line Tracker with a GUI and database. This is my Object Oriented Programming class project. For COP 3003 at Florida Gulf Coast University for fall semester 2020.
 It is a Java FX application that simulated a production line management system and uses Gradle to handle dependencies.
 
 ## Demonstration
-![A demonstrative GIF of the application](demo.gif)
+![A demonstrative GIF of the application](demo.gif)*********edit
 
+## Documentation
+[ProductionLineTracker JavaDocs](https://RachelAiko.github.io/ProductionLineTracker/)************edit
+
+## Diagrams
 The project's database diagram:
 
-![A diagram of the project's database](diagram_database.png)
+![A diagram of the project's database](diagram_database.png) ********edit
 
-## Software
-
-This project was made using Java FX and Gradle.
-It also uses a H2 Driver.
+## Getting Started
+An executable jar copy of my program:
+[ProductionLineTracker JavaDocs](https://RachelAiko.github.io/ProductionLineTracker/) *********edit
 
 ## Built With
 - JetBrain's IntelliJ IDEA Ultimate
+- Gradle
 - Scene Builder
-
-<!-- ## Contributing -->
 
 ## Author
 
@@ -47,6 +49,26 @@ Rachel Matthews <ramatthews7888@eagle.fgcu.edu>
 - Using String Builder
 - Using Regex
 - Designing recursive functions
+
+## Problem Statement
+-   **Goals**
+        1.  Reinforce understanding of object oriented programming concepts.
+        2.  Practice Java programming.
+        3.  Learn basic graphical user interface (GUI) programming using Java FX and Scene Builder.
+        4.  Learn basic database programming.
+        4.  Learn basic database programming.
+-   **Boundaries / Scope**
+
+-   **Success criteria** 
+
+-   **Constraints**
+
+-   **Assumptions** 
+
+-   **Stakeholders**
+
+-   **Timelines**
+        
    
 
 
