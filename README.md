@@ -25,7 +25,7 @@ The project's database diagram:
 
 ## Getting Started
 An executable jar copy of my program:
-[ProductionLineTracker JavaDocs](https://github.com/RachelAiko/ProductionLineTracker/blob/master/Production%20Line%20Tracker-1.0.jar) *********edit
+[ProductionLineTracker Jar file](https://github.com/RachelAiko/ProductionLineTracker/blob/master/Production%20Line%20Tracker-1.0.jar) 
 
 ## Built With
 - JetBrain's IntelliJ IDEA Ultimate
