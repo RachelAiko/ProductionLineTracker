@@ -4,7 +4,7 @@
  * PROJ: ProductionLineTracker
  * FILE: Screen.java
  *
- * Defines the Screen class.
+ * Defines the Screen class
  */
 
 public class Screen implements ScreenSpec {
