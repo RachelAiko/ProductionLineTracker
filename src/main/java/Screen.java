@@ -1,9 +1,10 @@
-/**
- * AUTH: Rachel Matthews DATE: Sat, Sep 19th, 2020 PROJ: ProductionLineTracker FILE: Screen.java
+/*
+ * AUTH: Rachel Matthews
+ * DATE: Sat, Sep 19th, 2020
+ * PROJ: ProductionLineTracker
+ * FILE: Screen.java
  *
- * <p>
  * Defines the Screen class.
- * </p>
  */
 
 public class Screen implements ScreenSpec {
